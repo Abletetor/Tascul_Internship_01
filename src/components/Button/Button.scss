@@ -1,0 +1,41 @@
+.button {
+  padding: 0.8rem 1.6rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  &--primary {
+    background-color: #0066ff;
+    color: #fff;
+    border: none;
+
+    &:hover {
+      background-color: #0056d4;
+    }
+  }
+  
+  &--secondary {
+    background-color: #f3f3f3;
+    color: #333;
+    border: 1px solid #ccc;
+
+    &:hover {
+      background-color: #e0e0e0;
+    }
+  }
+  
+  &--outline {
+    background-color: transparent;
+    color: #0066ff;
+    border: 1px solid #0066ff;
+
+    &:hover {
+      background-color: #f0f8ff;
+    }
+  }
+
+  .button__icon {
+    margin-right: 0.5rem;
+  }
+}

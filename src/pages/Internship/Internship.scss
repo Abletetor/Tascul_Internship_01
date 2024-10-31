@@ -1,0 +1,129 @@
+.internship {
+  padding: 2rem;
+  background-color: #f8f9fa;
+  color: #333;
+  text-align: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin-top: 3rem;
+
+  &.dark {
+    background-color: #1a1a2e;
+    color: #f1f1f1;
+  }
+
+  h1 {
+    font-size: 2.4rem;
+    margin-bottom: 2rem;
+    color: #1a1a2e;
+
+    .dark & {
+      color: #f1f1f1;
+    }
+  }
+
+  .internship__intro {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 2rem;
+    gap: 2rem;
+
+    .internship__text {
+      max-width: 600px;
+      margin-bottom: 2rem;
+      p {
+        font-size: 1rem;
+        text-align: left;
+        line-height: 1.6;
+        color: #333;
+
+        .dark & {
+          color: #dcdcdc;
+        }
+      }
+    }
+
+    .internship__image {
+      img {
+        width: 100%;
+        max-width: 400px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+
+  .internship__features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+
+    .internship__card {
+      background-color: #ffffff;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-align: center;
+
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .dark & {
+        background-color: #2e2e47;
+        color: #f1f1f1;
+      }
+
+      .internship__icon {
+        font-size: 2rem;
+        color: #0066ff;
+        margin-bottom: 1rem;
+      }
+
+      h3 {
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+        color: #1a1a2e;
+
+        .dark & {
+          color: #e0e0e0;
+        }
+      }
+
+      p {
+        font-size: 1rem;
+        color: #333;
+
+        .dark & {
+          color: #dcdcdc;
+        }
+      }
+    }
+  }
+
+  .internship__cta {
+    margin-top: 2rem;
+    
+    .cta-btn  {
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      background-color: #0056cc;
+      text-decoration: none;
+      color: #ffffff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      text-decoration: none; 
+      display: inline-block;
+
+      &:hover {
+        transform: scale(1.05) translateY(-2px);
+        background-color: #004bb5;
+      }
+    }
+  }
+}
