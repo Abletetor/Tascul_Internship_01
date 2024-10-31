@@ -34,10 +34,14 @@
     }
   }
 
-  &__title {
+  &__title h2 {
     font-size: 2.5rem;
     font-weight: bold;
     margin-bottom: 1rem;
+
+    @media (max-width: 768px) {
+      font-size: 1.9rem;
+    }
   }
 
   &__points {
@@ -62,7 +66,7 @@
   }
 
   &__video {
-    max-width: 40%; // Adjusted to fit well next to text
+    max-width: 40%;
 
     video {
       width: 100%;
