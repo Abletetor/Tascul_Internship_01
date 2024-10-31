@@ -6,7 +6,7 @@ import { ThemeContext } from '../../context/ThemeContext';
 import GrowingTogether from '../../components/GrowingTogether/GrowingTogether';
 import WhyChooseUs from '../../components/WhyChooseUs/WhyChooseUs';
 import Testimonials from '../../components/Testimonials/Testimonial';
-import Faq from '../../components/FAQ/FAQ';
+import Faq from '../../components/Faq/Faq';
 
 const Home = () => {
    const { theme } = useContext(ThemeContext);
