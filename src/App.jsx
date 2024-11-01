@@ -6,10 +6,13 @@ import Services from './pages/Services/Services';
 import Internship from './pages/Internship/Internship';
 import Contact from './pages/Contact/Contact';
 import Footer from './components/Footer/Footer';
+import ScrollToTop from './components/ScrollToTop/ScrollToTop';
+
 
 function App () {
    return (
       <Router>
+         <ScrollToTop />
          <Navbar />
          <Routes>
             <Route path="/" element={ <Home /> } />
