@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import { FaUser, FaEnvelope, FaIdCard, FaLock } from 'react-icons/fa';
 import { ThemeContext } from '../../../context/ThemeContext';
-import './SignUp.scss';
+import './Signup.scss';
 
 const SignUp = () => {
    const [name, setName] = useState('');
