@@ -1,0 +1,127 @@
+.review-system {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  h3 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #1a1a2e;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .reviews-list {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: 1fr; 
+
+    @media (min-width: 600px) {
+      grid-template-columns: repeat(2, 1fr); 
+    }
+
+    @media (min-width: 1024px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .review-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1.5rem;
+    background-color: #fafafa;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    h4 {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #1a1a2e;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 1rem;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    .review-actions {
+      margin-top: 1rem;
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+
+      button {
+        flex: 1 1 48%;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        font-size: 0.9rem;
+        cursor: pointer;
+        border: none;
+        transition: background-color 0.3s ease;
+
+        &.approve-btn {
+          background-color: #4fafff;
+          color: white;
+
+          &:hover {
+            background-color: #0066ff;
+          }
+        }
+
+        &.reject-btn {
+          background-color: #ff4f4f;
+          color: white;
+
+          &:hover {
+            background-color: #ff3333;
+          }
+        }
+      }
+    }
+  }
+
+  // Dark mode styling
+  &.darkmode {
+    h3 {
+      color: #ecf0f1;
+    }
+
+    .review-card {
+      background-color: #1a1a2e;
+      border-color: #333;
+
+      h4 {
+        color: #ecf0f1;
+      }
+
+      p {
+        color: #e0e0e0;
+      }
+
+      .review-actions {
+        .approve-btn {
+          background-color: #1f8bff;
+
+          &:hover {
+            background-color: #0066ff;
+          }
+        }
+
+        .reject-btn {
+          background-color: #ff4f4f;
+
+          &:hover {
+            background-color: #ff3333;
+          }
+        }
+      }
+    }
+  }
+}

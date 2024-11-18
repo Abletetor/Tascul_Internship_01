@@ -1,0 +1,21 @@
+.email-verification-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+  padding: 2rem;
+  background-color: #f0f4f8;
+
+  h2 {
+    font-size: 2rem;
+    color: #4fafff;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1rem;
+    color: #333;
+  }
+}

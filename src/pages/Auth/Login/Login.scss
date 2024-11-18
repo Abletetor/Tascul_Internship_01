@@ -1,0 +1,191 @@
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 100px);
+  padding: 2rem 1rem;
+  background-color: #f4f4f4;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  margin-top: 4rem;
+
+  h2 {
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    color: #333;
+    transition: color 0.3s ease;
+  }
+
+  .login-tabs {
+    display: flex;
+    margin-bottom: 1rem;
+
+    button {
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      background-color: transparent;
+      color: #333;
+      font-family: "Poppins", sans-serif;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+
+      &.active {
+        background-color: #4fafff;
+        color: #fff;
+      }
+
+      &:hover {
+        background-color: #e0e0e0;
+      }
+    }
+  }
+
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    background-color: #fff;
+    padding: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+
+    .form-group {
+      margin-bottom: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      label {
+        display: flex;
+        align-items: center;
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+        color: #333;
+        transition: color 0.3s ease;
+
+        svg {
+          margin-right: 0.5rem;
+          color: #4fafff;
+          font-size: 1.2rem;
+          transition: color 0.3s ease, transform 0.3s ease;
+        }
+      }
+
+      input {
+        width: 100%;
+        padding: 0.8rem;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-family: "Poppins", sans-serif;
+        outline: none;
+        transition: border-color 0.3s, background-color 0.3s, color 0.3s;
+
+        &:focus {
+          border-color: #4fafff;
+
+          & + label svg {
+            color: #3e8cc1;
+            transform: scale(1.1);
+          }
+        }
+      }
+    }
+
+    .btn-login {
+      background-color: #4fafff;
+      color: #fff;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 5px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      font-family: "Poppins", sans-serif;
+
+      &:hover {
+        background-color: #3e8cc1;
+      }
+    }
+  }
+
+  .link-signup,
+  .link-reset {
+    color: #4fafff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &.dark {
+    background-color: #1a1a2e;
+
+    h2 {
+      color: #fff;
+    }
+
+    .login-tabs {
+      button {
+        border-color: #555;
+        color: #ccc;
+
+        &.active {
+          background-color: #4fafff;
+          color: #fff;
+        }
+
+        &:hover {
+          background-color: #333;
+        }
+      }
+    }
+
+    .login-form {
+      background-color: #2b2b3d;
+
+      .form-group {
+        label {
+          color: #ccc;
+
+          svg {
+            color: #4fafff;
+
+            &:hover {
+              color: #3e8cc1;
+            }
+          }
+        }
+
+        input {
+          background-color: #333;
+          color: #fff;
+          border-color: #444;
+
+          &:focus + label svg {
+            color: #4fafff;
+          }
+        }
+      }
+
+      .btn-login {
+        background-color: #4fafff;
+
+        &:hover {
+          background-color: #3e8cc1;
+        }
+      }
+    }
+
+    .link-signup,
+    .link-reset {
+      color: #4fafff;
+    }
+  }
+}

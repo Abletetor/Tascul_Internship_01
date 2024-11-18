@@ -8,7 +8,7 @@
   position: fixed;
   top: 0; 
   width: 100%;
-  z-index: 1000;
+  z-index: 10000;
   transition: background-color 0.3s ease;
 
   &__logo {
@@ -23,7 +23,7 @@
     display: flex;
     gap: 2.5rem;
 
-    a {
+    li a {
       color: #ffffff;
       text-decoration: none;
       font-weight: 500;
@@ -34,7 +34,6 @@
         color: #4fafff;
       }
 
-      // Active state style
       &.active {
         color: #4fafff;
         font-weight: 600;
@@ -52,6 +51,43 @@
     }
   }
 
+  &__actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+
+    .navbar__button {
+      padding: 0.5rem 1.25rem;
+      border-radius: 5px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-align: center;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      cursor: pointer;
+      color: #ffffff;
+      border: 1px solid #0066ff;
+      background-color: transparent;
+      text-decoration: none;
+
+      &:hover {
+        background-color: #004bb5;
+        color: #ffffff;
+      }
+
+      &--signup {
+        background-color: #004bb5;
+        color: #ffffff;
+        font-weight: 600;
+
+        &:hover {
+          background-color: #ffffff;
+          color: #004bb5;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
   &__toggle {
     display: none;
     font-size: 1.5rem;
@@ -61,7 +97,6 @@
     cursor: pointer;
   }
 
-  // Mobile responsiveness
   @media (max-width: 768px) {
     &__links {
       display: none;
@@ -85,5 +120,31 @@
     &__toggle {
       display: block;
     }
+
+    &__actions {
+      gap: 0.5rem;
+    }
   }
+
+  .navbar__button--profile {
+   display: flex;
+   align-items: center;
+   padding: 10px;
+   font-size: 16px;
+   background-color: transparent;
+   border: none;
+   cursor: pointer;
+   color: #fff;
+   font-family: 'Poppins', sans-serif;
+   svg {
+      margin-right: 8px;
+      font-size: 18px;
+   }
+
+   &:hover {
+      background-color: #004bb5;
+      color: #f1f1f1;
+   }
+}
+
 }
