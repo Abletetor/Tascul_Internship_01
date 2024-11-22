@@ -56,28 +56,37 @@ const ReviewSystem = ({ reviews, setReviews }) => {
    return (
       <section className={ `review-system ${theme === 'dark' ? 'darkmode' : ''}` }>
          <h3 className="review-system__title">Review System</h3>
-         <div className="reviews-list">
-            { reviews.map((review) => (
-               <div className="review-card" key={ review._id }>
-                  <h4 className="review-card__name">{ review.name }</h4>
-                  <p className="review-card__feedback">{ review.feedback }</p>
-                  <div className="review-actions">
-                     <button
-                        onClick={ () => handleReviewAction(review._id, 'approve') }
-                        className="review-actions__button approve-btn"
-                     >
-                        Approve
-                     </button>
-                     <button
-                        onClick={ () => handleReviewAction(review._id, 'reject') }
-                        className="review-actions__button reject-btn"
-                     >
-                        Reject
-                     </button>
+
+         {/* Conditional Rendering: If no reviews, show a message */ }
+         { reviews.length === 0 ? (
+            <div className="no-reviews-message">
+               <p>No reviews available for approval or rejection at the moment. Please check back later.</p>
+            </div>
+         ) : (
+            <div className="reviews-list">
+               { reviews.map((review) => (
+                  <div className="review-card" key={ review._id }>
+                     <h4 className="review-card__name">{ review.name }</h4>
+                     <p className="review-card__feedback">{ review.feedback }</p>
+                     <div className="review-actions">
+                        <button
+                           onClick={ () => handleReviewAction(review._id, 'approve') }
+                           className="review-actions__button approve-btn"
+                        >
+                           Approve
+                        </button>
+                        <button
+                           onClick={ () => handleReviewAction(review._id, 'reject') }
+                           className="review-actions__button reject-btn"
+                        >
+                           Reject
+                        </button>
+                     </div>
                   </div>
-               </div>
-            )) }
-         </div>
+               )) }
+            </div>
+         ) }
+
          <ToastContainer position="top-right" autoClose={ 3000 } style={ { zIndex: 100001 } } />
       </section>
    );

@@ -60,24 +60,30 @@ const ProjectShowcase = ({ projects, setProjects }) => {
             <ProjectForm onSubmit={ handleProjectSubmit } />
          ) : (
             <div className="projects-list">
-               { projects.map((project, index) => (
-                  <div className="project-card" key={ index }>
-                     <img
-                        src={ `${import.meta.env.VITE_APP_URL}/${project.thumbnail}` }
-                        alt={ `${project.projectName} Thumbnail` }
-                     />
-                     <h4>{ project.projectName }</h4>
-                     <p>{ project.description }</p>
-                     <div className="project-links">
-                        <a href={ project.liveLink } target="_blank" rel="noopener noreferrer">
-                           Live Project
-                        </a>
-                        <a href={ project.githubLink } target="_blank" rel="noopener noreferrer">
-                           GitHub Repository
-                        </a>
-                     </div>
+               { projects.length === 0 ? (
+                  <div className="no-projects-message">
+                     <p>No projects available at the moment. Please add a new project.</p>
                   </div>
-               )) }
+               ) : (
+                  projects.map((project, index) => (
+                     <div className="project-card" key={ index }>
+                        <img
+                           src={ `${import.meta.env.VITE_APP_URL}/${project.thumbnail}` }
+                           alt={ `${project.projectName} Thumbnail` }
+                        />
+                        <h4>{ project.projectName }</h4>
+                        <p>{ project.description }</p>
+                        <div className="project-links">
+                           <a href={ project.liveLink } target="_blank" rel="noopener noreferrer">
+                              Live Project
+                           </a>
+                           <a href={ project.githubLink } target="_blank" rel="noopener noreferrer">
+                              GitHub Repository
+                           </a>
+                        </div>
+                     </div>
+                  ))
+               ) }
             </div>
          ) }
       </section>
