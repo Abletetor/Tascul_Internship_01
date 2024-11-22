@@ -27,7 +27,7 @@ const Reviews = () => {
 
          const data = await response.json();
          if (response.ok) {
-            setMessage(data.message);
+            alert(data.message);
             setFormData({ name: '', email: '', feedback: '' });
          } else {
             setError(data.message);

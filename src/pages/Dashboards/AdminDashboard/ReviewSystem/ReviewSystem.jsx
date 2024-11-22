@@ -28,7 +28,6 @@ const ReviewSystem = ({ reviews, setReviews }) => {
 
    // Handle Approve/Reject action
    const handleReviewAction = async (id, action) => {
-      console.log("Handling action:", action, "for review ID:", id);
       try {
          const token = localStorage.getItem('token');
          const endpoint =
@@ -45,12 +44,14 @@ const ReviewSystem = ({ reviews, setReviews }) => {
 
          console.log(`Review ${action === 'approve' ? 'Approved' : 'Rejected'} successfully`, response.data);
          setReviews((prev) => prev.filter((review) => review._id !== id));
+
+         // Show a success alert after the action is performed
+         alert(`Review ${action === 'approve' ? 'Approved' : 'Rejected'} successfully.`);
       } catch (error) {
          console.error(`Error handling review ${action}:`, error.response?.data || error.message);
          alert(`Failed to ${action} review: ${error.response?.data?.message || "Unknown error"}`);
       }
    };
-
 
    return (
       <section className={ `review-system ${theme === 'dark' ? 'darkmode' : ''}` }>
