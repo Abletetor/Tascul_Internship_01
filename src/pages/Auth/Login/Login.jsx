@@ -4,6 +4,8 @@ import { ThemeContext } from '../../../context/ThemeContext';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../../../context/AuthContext';
+import { ToastContainer, toast } from 'react-toastify'; // Import Toastify
+import 'react-toastify/dist/ReactToastify.css'; // Import Toastify CSS
 import './Login.scss';
 
 const Login = () => {
@@ -29,11 +31,13 @@ const Login = () => {
 
          const response = await axios.post(endpoint, loginData);
 
-         // Store token in localStorage and call login method from context
          const { token, user } = response.data;
          localStorage.setItem('token', token);
          localStorage.setItem('user', JSON.stringify(user));
          login(user, token);
+
+         // Success Toast
+         toast.success('Login successful! Welcome back!');
 
          // Redirect to the appropriate dashboard
          if (user.role === 'admin') {
@@ -43,7 +47,7 @@ const Login = () => {
          }
       } catch (error) {
          console.error('Login error:', error);
-         alert(error.response?.data?.message || 'Something went wrong');
+         toast.error('Wrong ID or password!');
       }
    };
 
@@ -133,6 +137,7 @@ const Login = () => {
                </>
             ) }
          </form>
+         <ToastContainer position="top-right" autoClose={ 3000 } style={ { zIndex: 100001 } } />
       </div>
    );
 };

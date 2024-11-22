@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types */
 import { useState, useContext } from 'react';
 import { ThemeContext } from '../../../../context/ThemeContext';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './ProjectForm.scss';
 
 const ProjectForm = ({ onSubmit }) => {
@@ -11,7 +13,6 @@ const ProjectForm = ({ onSubmit }) => {
       liveLink: '',
       githubLink: '',
    });
-   const [successMessage, setSuccessMessage] = useState('');
    const { theme } = useContext(ThemeContext);
 
    const handleChange = (e) => {
@@ -33,21 +34,19 @@ const ProjectForm = ({ onSubmit }) => {
       formData.append('liveLink', projectData.liveLink);
       formData.append('githubLink', projectData.githubLink);
 
-      onSubmit(formData);
-
-      // Display success message & Reset form fields
-      setSuccessMessage('Project added successfully!');
-      setProjectData({ projectName: '', description: '', thumbnail: null, liveLink: '', githubLink: '' });
-
-      // Remove success message after 3 seconds
-      setTimeout(() => setSuccessMessage(''), 3000);
+      try {
+         onSubmit(formData);
+         toast.success('Project added successfully!');
+         setProjectData({ projectName: '', description: '', thumbnail: null, liveLink: '', githubLink: '' });
+      } catch (error) {
+         toast.error('Failed to add project. Please try again.');
+         console.error('Error adding project:', error);
+      }
    };
 
    return (
       <form onSubmit={ handleSubmit } className={ `project-form ${theme === 'dark' ? 'dark' : ''}` }>
          <h3>Add a New Project</h3>
-
-         { successMessage && <div className="alert success-alert">{ successMessage }</div> }
 
          <input
             type="text"
@@ -88,6 +87,7 @@ const ProjectForm = ({ onSubmit }) => {
             required
          />
          <button type="submit">Add Project</button>
+         <ToastContainer position="top-right" autoClose={ 3000 } style={ { zIndex: 100001 } } />
       </form>
    );
 };

@@ -1,12 +1,12 @@
 import { useState, useContext } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './Reviews.scss';
 
 const Reviews = () => {
    const { theme } = useContext(ThemeContext);
    const [formData, setFormData] = useState({ name: '', email: '', feedback: '' });
-   const [message, setMessage] = useState('');
-   const [error, setError] = useState('');
 
    const handleChange = (e) => {
       const { name, value } = e.target;
@@ -15,8 +15,6 @@ const Reviews = () => {
 
    const handleSubmit = async (e) => {
       e.preventDefault();
-      setMessage('');
-      setError('');
 
       try {
          const response = await fetch(`${import.meta.env.VITE_APP_URL}/api/admin/submit`, {
@@ -27,13 +25,13 @@ const Reviews = () => {
 
          const data = await response.json();
          if (response.ok) {
-            alert(data.message);
+            toast.success(data.message || 'Feedback submitted successfully!');
             setFormData({ name: '', email: '', feedback: '' });
          } else {
-            setError(data.message);
+            toast.error(data.message || 'Failed to submit feedback.');
          }
       } catch (error) {
-         setError('An error occurred while submitting feedback. Please try again later.');
+         toast.error('An error occurred while submitting feedback. Please try again later.');
          console.error('Error submitting feedback:', error);
       }
    };
@@ -82,8 +80,7 @@ const Reviews = () => {
             </div>
             <button type="submit" className="submit-btn">Submit Feedback</button>
          </form>
-         { message && <p className="success-message">{ message }</p> }
-         { error && <p className="error-message">{ error }</p> }
+         <ToastContainer position="top-right" autoClose={ 3000 } style={ { zIndex: 100001 } } />
       </div>
    );
 };

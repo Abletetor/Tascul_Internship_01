@@ -1,5 +1,7 @@
 import { useContext, useState } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { FaUser, FaEnvelope, FaPhone, FaPaperPlane } from 'react-icons/fa';
 import './Contact.scss';
 
@@ -7,33 +9,37 @@ const Contact = () => {
    const { theme } = useContext(ThemeContext);
    const [formData, setFormData] = useState({ fullname: '', email: '', phone: '', message: '' });
 
-   //Handling form elements change
+   // Handling form elements change
    const handleChange = (e) => {
       const { name, value } = e.target;
       setFormData({ ...formData, [name]: value });
    };
 
-   //Handling form submission
+   // Handling form submission
    const handleSubmit = async (e) => {
       e.preventDefault();
 
       const formData = new FormData(e.target);
-      formData.append("access_key", import.meta.env.VITE_FORM_ID);
+      formData.append('access_key', import.meta.env.VITE_FORM_ID);
 
-      const response = await fetch("https://api.web3forms.com/submit", {
-         method: "POST",
-         body: formData
-      });
+      try {
+         const response = await fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            body: formData,
+         });
 
-      const data = await response.json();
+         const data = await response.json();
 
-      if (data.success) {
-         alert("Mail sent Successfully");
-         e.target.reset();
-
-      } else {
-         console.log("Error", data);
-         alert(data.message);
+         if (data.success) {
+            toast.success('Mail sent successfully!');
+            e.target.reset();
+            setFormData({ fullname: '', email: '', phone: '', message: '' });
+         } else {
+            toast.error(data.message || 'Failed to send the message.');
+         }
+      } catch (error) {
+         console.error('Error:', error);
+         toast.error('An error occurred. Please try again.');
       }
    };
 
@@ -87,6 +93,7 @@ const Contact = () => {
                Send Message <FaPaperPlane />
             </button>
          </form>
+         <ToastContainer position="top-right" autoClose={ 3000 } style={ { zIndex: 100001 } } />
       </section>
    );
 };

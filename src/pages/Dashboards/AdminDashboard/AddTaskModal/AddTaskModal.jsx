@@ -1,5 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './AddTaskModal.scss';
 
 const AddTaskModal = ({ onClose, internId }) => {
@@ -11,6 +13,7 @@ const AddTaskModal = ({ onClose, internId }) => {
 
    const handleSubmit = async (e) => {
       e.preventDefault();
+
       try {
          const response = await fetch(`${import.meta.env.VITE_APP_URL}/api/admin/addTask`, {
             method: 'POST',
@@ -22,12 +25,15 @@ const AddTaskModal = ({ onClose, internId }) => {
          });
 
          if (response.ok) {
+            toast.success('Task added successfully!');
             onClose();
          } else {
-            console.error('Failed to add task');
+            const data = await response.json();
+            toast.error(`Failed to add task: ${data.message || 'Unknown error'}`);
          }
       } catch (error) {
          console.error('Error:', error);
+         toast.error('An error occurred while adding the task. Please try again.');
       }
    };
 
@@ -50,6 +56,7 @@ const AddTaskModal = ({ onClose, internId }) => {
                   <button type="button" className="cancel-button" onClick={ onClose }>Cancel</button>
                </div>
             </form>
+            <ToastContainer position="top-right" autoClose={ 3000 } style={ { zIndex: 100001 } } />
          </div>
       </div>
    );

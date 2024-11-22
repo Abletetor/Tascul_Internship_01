@@ -1,7 +1,9 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useContext } from 'react';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
 import { ThemeContext } from '../../../../context/ThemeContext';
+import 'react-toastify/dist/ReactToastify.css';
 import './ReviewSystem.scss';
 
 const ReviewSystem = ({ reviews, setReviews }) => {
@@ -13,13 +15,12 @@ const ReviewSystem = ({ reviews, setReviews }) => {
          try {
             const token = localStorage.getItem('token');
             const response = await axios.get(`${import.meta.env.VITE_APP_URL}/api/admin/reviews/pending`, {
-               headers: {
-                  Authorization: `Bearer ${token}`,
-               },
+               headers: { Authorization: `Bearer ${token}` },
             });
             setReviews(response.data);
          } catch (error) {
             console.error('Error fetching reviews:', error.response?.data || error.message);
+            toast.error('Failed to fetch reviews.');
          }
       };
 
@@ -36,20 +37,19 @@ const ReviewSystem = ({ reviews, setReviews }) => {
                : `${import.meta.env.VITE_APP_URL}/api/admin/reviews/${id}/reject`;
 
          const method = action === 'approve' ? 'put' : 'delete';
-         const response = await axios({
+         await axios({
             method,
             url: endpoint,
             headers: { Authorization: `Bearer ${token}` },
          });
 
-         console.log(`Review ${action === 'approve' ? 'Approved' : 'Rejected'} successfully`, response.data);
          setReviews((prev) => prev.filter((review) => review._id !== id));
 
-         // Show a success alert after the action is performed
-         alert(`Review ${action === 'approve' ? 'Approved' : 'Rejected'} successfully.`);
+         // Show success toast
+         toast.success(`Review ${action === 'approve' ? 'approved' : 'rejected'} successfully.`);
       } catch (error) {
          console.error(`Error handling review ${action}:`, error.response?.data || error.message);
-         alert(`Failed to ${action} review: ${error.response?.data?.message || "Unknown error"}`);
+         toast.error(`Failed to ${action} review: ${error.response?.data?.message || 'Unknown error'}`);
       }
    };
 
@@ -78,6 +78,7 @@ const ReviewSystem = ({ reviews, setReviews }) => {
                </div>
             )) }
          </div>
+         <ToastContainer position="top-right" autoClose={ 3000 } style={ { zIndex: 100001 } } />
       </section>
    );
 };
