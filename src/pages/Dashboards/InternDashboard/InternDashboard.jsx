@@ -75,7 +75,7 @@ const InternDashboard = () => {
             <div className={ `card top-card ${theme === 'dark' ? 'darkmode' : ''}` }>
                <FaClock className="card-icon" />
                <h3>Duration</h3>
-               <p>1 Month</p>
+               <p>4 Weeks</p>
             </div>
             <div className={ `card bottom-card ${theme === 'dark' ? 'darkmode' : ''}` }>
                <FaTasks className="card-icon" />
