@@ -1,15 +1,15 @@
 import { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './RequestPasswordReset.scss';
 
 const RequestPasswordReset = () => {
    const [email, setEmail] = useState('');
-   const [message, setMessage] = useState('');
    const [loading, setLoading] = useState(false);
 
    const handleSubmit = async (e) => {
       e.preventDefault();
       setLoading(true);
-      setMessage('');
 
       try {
          const response = await fetch(`${import.meta.env.VITE_APP_URL}/api/intern/request-password-reset`, {
@@ -23,13 +23,14 @@ const RequestPasswordReset = () => {
          const data = await response.json();
 
          if (response.ok) {
-            setMessage(`A password reset link has been sent to ${email}. Please check your inbox.`);
+            toast.success(`A password reset link has been sent to ${email}. Please check your inbox.`);
+            setEmail('');
          } else {
-            setMessage(data.message || 'Something went wrong');
+            toast.error(data.message || 'Something went wrong.');
          }
       } catch (error) {
          console.error('Error requesting password reset:', error);
-         setMessage('An error occurred. Please try again later.');
+         toast.error('An error occurred. Please try again later.');
       } finally {
          setLoading(false);
       }
@@ -54,7 +55,7 @@ const RequestPasswordReset = () => {
             </button>
          </form>
 
-         { message && <p className="message">{ message }</p> }
+         <ToastContainer position="top-right" autoClose={ 4000 } style={ { zIndex: 100001 } } />
       </div>
    );
 };

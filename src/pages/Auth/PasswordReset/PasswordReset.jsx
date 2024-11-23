@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import './PasswordReset.scss';
 
@@ -7,14 +9,12 @@ const PasswordReset = () => {
    const { token } = useParams();
    const [newPassword, setNewPassword] = useState('');
    const [confirmPassword, setConfirmPassword] = useState('');
-   const [error, setError] = useState('');
-   const [success, setSuccess] = useState('');
    const [loading, setLoading] = useState(false);
    const navigate = useNavigate();
 
    useEffect(() => {
       if (!token) {
-         setError('Invalid or missing token');
+         toast.error('Invalid or missing token');
       }
    }, [token]);
 
@@ -22,12 +22,12 @@ const PasswordReset = () => {
       e.preventDefault();
 
       if (newPassword !== confirmPassword) {
-         setError('Passwords do not match');
+         toast.error('Passwords do not match');
          return;
       }
 
       if (newPassword.length < 6) {
-         setError('Password must be at least 6 characters');
+         toast.error('Password must be at least 6 characters');
          return;
       }
 
@@ -39,12 +39,12 @@ const PasswordReset = () => {
             { password: newPassword }
          );
 
-         setSuccess('Password reset successful! You can now log in with your new password.');
+         toast.success('Password reset successful! Redirecting to login...');
          setNewPassword('');
          setConfirmPassword('');
          setTimeout(() => navigate('/login'), 3000);
       } catch (error) {
-         setError(error.response?.data?.error || 'Failed to reset password');
+         toast.error(error.response?.data?.error || 'Failed to reset password');
       } finally {
          setLoading(false);
       }
@@ -78,8 +78,8 @@ const PasswordReset = () => {
                { loading ? 'Resetting...' : 'Reset Password' }
             </button>
          </form>
-         { error && <p className="error-message">{ error }</p> }
-         { success && <p className="success-message">{ success }</p> }
+
+         <ToastContainer position="top-right" autoClose={ 3000 } style={ { zIndex: 100001 } } />
       </div>
    );
 };

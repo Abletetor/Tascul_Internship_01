@@ -75,18 +75,4 @@
     }
   }
 
-  .success-alert {
-      background-color: #4caf50;
-      color: white;
-      padding: 0.5rem;
-      margin-bottom: 1rem;
-      border-radius: 5px;
-      text-align: center;
-      font-weight: bold;
-   }
-
-   &.dark .success-alert {
-      background-color: #388e3c;
-      color: #e0e0e0;
-   }
 }

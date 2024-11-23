@@ -1,6 +1,8 @@
 import { useState, useContext } from 'react';
 import { FaUser, FaEnvelope, FaIdCard, FaLock } from 'react-icons/fa';
+import { ToastContainer, toast } from 'react-toastify';
 import { ThemeContext } from '../../../context/ThemeContext';
+import 'react-toastify/dist/ReactToastify.css';
 import './Signup.scss';
 
 const SignUp = () => {
@@ -8,37 +10,36 @@ const SignUp = () => {
    const [email, setEmail] = useState('');
    const [internId, setInternId] = useState('');
    const [password, setPassword] = useState('');
-   const [error, setError] = useState('');
-   const [success, setSuccess] = useState('');
    const [isSubmitting, setIsSubmitting] = useState(false);
    const { theme } = useContext(ThemeContext);
 
    const handleSubmit = async (e) => {
       e.preventDefault();
-      setError('');
-      setSuccess('');
       setIsSubmitting(true);
 
       try {
          const response = await fetch(`${import.meta.env.VITE_APP_URL}/api/intern/signup`, {
             method: 'POST',
             headers: {
-               'Content-Type': 'application/json'
+               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ name, email, internId, password })
+            body: JSON.stringify({ name, email, internId, password }),
          });
 
          const data = await response.json();
 
          if (response.ok) {
-            setSuccess('Account created successfully! Please check your email to verify your account before logging in.');
-            setName(''); setEmail(''); setInternId(''); setPassword('');
+            toast.success('Account created successfully! Please check your email to verify your account before logging in.');
+            setName('');
+            setEmail('');
+            setInternId('');
+            setPassword('');
          } else {
-            setError(data.message || 'Something went wrong');
+            toast.error(data.message || 'Something went wrong');
          }
       } catch (error) {
-         setError('Server error. Please try again later.');
-         console.log(error);
+         toast.error('Server error. Please try again later.');
+         console.error(error);
       } finally {
          setIsSubmitting(false);
       }
@@ -47,8 +48,6 @@ const SignUp = () => {
    return (
       <div className={ `signup-container ${theme}` }>
          <h2>Create An Account</h2>
-         { error && <p className="error-message">{ error }</p> }
-         { success && <p className="success-message">{ success }</p> }
          <form onSubmit={ handleSubmit } className="signup-form">
             <div className="form-group">
                <label htmlFor="name">
@@ -110,6 +109,8 @@ const SignUp = () => {
                <a href="/login" className="link-login">Login</a>
             </p>
          </form>
+
+         <ToastContainer position="top-right" autoClose={ 4000 } style={ { zIndex: 100001 } } />
       </div>
    );
 };

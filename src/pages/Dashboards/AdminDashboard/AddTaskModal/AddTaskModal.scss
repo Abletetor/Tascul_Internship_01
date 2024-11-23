@@ -15,12 +15,12 @@
    background: #ffffff;
    padding: 1.5rem;
    border-radius: 8px;
-   width: 350px;  // Reduced width for a smaller form
+   width: 350px;
    max-width: 90%;
    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
    display: flex;
    flex-direction: column;
-   gap: 0.75rem;  // Reduced gap between elements
+   gap: 0.75rem; 
 
    h3 {
       font-size: 1.4rem;
@@ -33,19 +33,19 @@
    form {
       display: flex;
       flex-direction: column;
-      gap: 0.75rem;  // Reduced gap between form fields for compactness
-      max-height: 70vh;  // Limits height to prevent covering too much of the screen
+      gap: 0.75rem;
+      max-height: 70vh;
 
       label {
          font-size: 0.9rem;
          font-weight: 500;
          color: #555;
-         margin-bottom: 0.3rem;  // Reduced margin to keep label close to input
+         margin-bottom: 0.3rem;
       }
 
       input,
       textarea {
-         padding: 0.6rem;  // Reduced padding for a smaller input area
+         padding: 0.6rem;
          font-size: 1rem;
          border: 1px solid #ddd;
          border-radius: 5px;
@@ -59,8 +59,8 @@
 
       textarea {
          resize: vertical;
-         min-height: 80px;  // Reduced minimum height for a more compact textarea
-         max-height: 120px; // Limits max height for better control
+         min-height: 80px;
+         max-height: 120px;
       }
 
       .button-group {
@@ -70,8 +70,8 @@
 
          button {
             flex: 1;
-            padding: 0.6rem;  // Reduced padding for a smaller button size
-            font-size: 0.9rem;  // Slightly smaller font size
+            padding: 0.6rem;  
+            font-size: 0.9rem;
             font-weight: 600;
             border-radius: 5px;
             cursor: pointer;
